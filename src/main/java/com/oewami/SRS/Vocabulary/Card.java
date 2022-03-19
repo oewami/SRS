@@ -1,18 +1,31 @@
 package com.oewami.SRS.Vocabulary;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
+@Entity
+@Table
 public class Card {
+    @Id
+    @SequenceGenerator(
+            name = "card_sequence",
+            sequenceName = "card_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "card_sequence"
+    )
+    private Long id;
     private String concept;
     private String meaning;
     private String mnemonic;
-    private List<String> synonyms = new ArrayList<>();
-    private Date unlocked;
-    private int interval;
-    private int streak;
-    private List<Date> completedReviews = new ArrayList<>();
+    private String synonym;
+//    private String group;
+//    private Date unlocked;
+//    private Integer interval;
+//    private Integer streak;
+//    private Date lastCompletedReview;
 
 
     public Card(String concept, String meaning) {
@@ -22,6 +35,10 @@ public class Card {
 
     public Card() {
     }
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
 
     public String getConcept() {
         return concept;
@@ -47,45 +64,53 @@ public class Card {
         this.mnemonic = mnemonic;
     }
 
-    public List<String> getSynonyms() {
-        return synonyms;
+    public String getSynonym() {
+        return synonym;
     }
 
-    public void setSynonyms(List<String> synonyms) {
-        this.synonyms = synonyms;
+    public void setSynonym(String synonym) {
+        this.synonym = synonym;
     }
 
-    public Date getUnlocked() {
-        return unlocked;
-    }
+//    public String getGroup() {
+//        return group;
+//    }
+//
+//    public void setGroup(String group) {
+//        this.group = group;
+//    }
 
-    public void setUnlocked(Date unlocked) {
-        this.unlocked = unlocked;
-    }
+//    public Date getUnlocked() {
+//        return unlocked;
+//    }
+//
+//    public void setUnlocked(Date unlocked) {
+//        this.unlocked = unlocked;
+//    }
+//
+//    public Integer getInterval() {
+//        return interval;
+//    }
+//
+//    public void setInterval(Integer interval) {
+//        this.interval = interval;
+//    }
+//
+//    public Integer getStreak() {
+//        return streak;
+//    }
+//
+//    public void setStreak(Integer streak) {
+//        this.streak = streak;
+//    }
 
-    public int getInterval() {
-        return interval;
-    }
-
-    public void setInterval(int interval) {
-        this.interval = interval;
-    }
-
-    public int getStreak() {
-        return streak;
-    }
-
-    public void setStreak(int streak) {
-        this.streak = streak;
-    }
-
-    public List<Date> getCompletedReviews() {
-        return completedReviews;
-    }
-
-    public void setCompletedReviews(List<Date> completedReviews) {
-        this.completedReviews = completedReviews;
-    }
+//    public Date getLastCompletedReview() {
+//        return lastCompletedReview;
+//    }
+//
+//    public void setLastCompletedReview(Date completedReview) {
+//        this.lastCompletedReview = completedReview;
+//    }
 
     @Override
     public String toString() {
