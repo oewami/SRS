@@ -1,9 +1,9 @@
 package com.oewami.SRS.Vocabulary;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/card")
@@ -17,7 +17,12 @@ public class CardController {
     }
 
     @GetMapping
-    public String getCards() {
+    public List<Card> getCards() {
         return cardService.getCards();
+    }
+
+    @PostMapping
+    public void addCard(@RequestBody Card card) {
+        cardService.addCard(card);
     }
 }
