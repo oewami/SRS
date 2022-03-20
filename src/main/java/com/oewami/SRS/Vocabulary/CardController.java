@@ -25,4 +25,18 @@ public class CardController {
     public void addCard(@RequestBody Card card) {
         cardService.addCard(card);
     }
+
+    @DeleteMapping(path = "{id}")
+    public void deleteCard(@PathVariable("id")Long id) {
+        cardService.deleteCard(id);
+    }
+
+    //TODO Status Code 200 but does not update in table
+    @PutMapping(path = "{id}")
+    public void updateCard(@PathVariable("id") Long id,
+                           @RequestBody(required = false) String meaning,
+                           @RequestBody(required = false) String mneumonic,
+                           @RequestBody(required = false) String synonym) {
+        cardService.updateCard(id, meaning, mneumonic, synonym);
+    }
 }
