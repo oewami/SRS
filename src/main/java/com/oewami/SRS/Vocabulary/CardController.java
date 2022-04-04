@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping(path = "api/v1/card")
 public class CardController {
@@ -22,6 +23,11 @@ public class CardController {
         return cardService.getCards();
     }
 
+    @GetMapping("/id/{id}")
+    public List<Card> getCardById(@PathVariable("id") Long id) {
+        return cardService.getCardById(id);
+    }
+
     @PostMapping
     public void addCard(@RequestBody Card card) {
         cardService.addCard(card);
@@ -32,16 +38,9 @@ public class CardController {
         cardService.deleteCard(id);
     }
 
-    //TODO Status Code 200 but does not update in table
     @PutMapping(path = "{id}")
     @ResponseBody
     public void updateCard(@PathVariable("id") Long id, @RequestBody Map<String, String> map) {
-//                           @RequestBody(required = false) String concept,
-//                           @RequestBody(required = false) String meaning,
-//                           @RequestBody(required = false) String mnemonic,
-//                           @RequestBody(required = false) String synonym) {
-//        cardService.updateCard(id, concept, meaning, mnemonic, synonym);
-
         String concept = map.get("concept");
         String meaning = map.get("meaning");
         String mnemonic = map.get("mnemonic");
@@ -50,4 +49,8 @@ public class CardController {
         cardService.updateCard(id, concept, meaning, mnemonic, synonym);
     }
 
+//    @GetMapping("getconcept/{concept}")
+//    public List<Card> getCardByConcept(@PathVariable("concept") String concept) {
+//        return cardService.getCardByConcept(concept);
+//    }
 }

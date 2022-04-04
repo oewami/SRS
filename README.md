@@ -11,6 +11,8 @@ Create a web application that works similar to Anki. First dataset will be one l
 - Read DONE
 - Update DONE
 - Delete DONE
+- Get object by id DONE
+- get object by concept IN PROGRESS
 - Draw Storyboard Mockups for Website designs
 - Implement website design
 - Setup interval progression system.

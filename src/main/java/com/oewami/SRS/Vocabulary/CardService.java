@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CardService {
@@ -19,6 +20,14 @@ public class CardService {
     public List<Card> getCards() {
         return cardRepository.findAll();
     }
+
+    public List<Card> getCardById(Long id) {
+        return getCards().stream().filter(card -> card.getId() == id).collect(Collectors.toList());
+    }
+// TODO get card by concept returns status 200 but nothing shows up on webpage
+//    public List<Card> getCardByConcept(String concept) {
+//        return getCards().stream().filter(card -> card.getConcept() == concept).collect(Collectors.toList());
+//    }
 
     public void addCard(Card card) {
         Optional<Card> byConcept = cardRepository.findCardByConcept(card.getConcept());
@@ -34,8 +43,6 @@ public class CardService {
         cardRepository.deleteById(id);
     }
 
-
-    //TODO Status code 200 but does not update in table
     @Transactional
     public void updateCard(Long id, String concept, String meaning, String mnemonic, String synonym) {
         Card card = cardRepository.findById(id).orElseThrow(() -> new IllegalStateException("student with id " + id + " does not exist"));
@@ -58,4 +65,5 @@ public class CardService {
 
 
     }
+
 }
